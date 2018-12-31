@@ -100,3 +100,8 @@ setInterval(() => {
     }
 }, 500);
 
+function errorCo(){
+    var error = document.getElementById('returnCoError');
+    error.innerHTML = "Pseudo ou mot de passe incorrect";
+}
+

@@ -46,7 +46,7 @@
             Have an account?
         </span>
 
-        <a href="/mtg" class="txt3 bo1 hov1">
+        <a href="index.php" class="txt3 bo1 hov1">
             Sign in now
         </a>
     </div>

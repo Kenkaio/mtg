@@ -37,7 +37,7 @@ if (isset($_POST['pseudoCo'])) {
         redirect_to('location:admin.php');
     }
     else{
-        echo 'merde alors';
+        redirect_to('location:../index.php?error=1');
     }
 }
 

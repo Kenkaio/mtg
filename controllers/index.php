@@ -18,8 +18,12 @@ if (empty($_SESSION['ouvert'])) {
     else{
         require 'views/index.php';
     }
+    if(isset($_GET['error'])){
+        if ($_GET['error'] == 1) {
+            echo "<script>errorCo();</script>";
+        }
+    }
 }
 else{
     redirect_to('location:controllers/admin.php');
 }
-

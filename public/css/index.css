@@ -31,3 +31,9 @@ color:#CC0000;
 #confirmSignUp{
     display: none;
 }
+
+#returnCoError{
+    color: red;
+    margin-left: 60px;
+    margin-bottom: 20px;
+}
