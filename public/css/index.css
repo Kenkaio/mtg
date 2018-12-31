@@ -1,0 +1,33 @@
+.return{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 21px;
+    right: -35px;
+}
+
+#returnConfirmPass, #returnMail{
+    background-size: 100%;
+}
+
+#returnPass{
+    width: 120px;
+    right: -135px;
+}
+
+#returnPseudo, #returnMail{
+    width: 140px;
+    right: -155px;
+}
+
+.dispo {
+color:#008000;
+}
+
+.busy {
+color:#CC0000;
+}
+
+#confirmSignUp{
+    display: none;
+}
