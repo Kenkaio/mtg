@@ -1,6 +1,12 @@
 <?php
 class UserManager{
 
+    /**
+     * Ajouter un utilisateur à la bdd
+     *
+     * @param user $user
+     * @return void
+     */
     public function add(user $user){
         $db = dataBase::dbConnect();
         $req = $db->prepare('INSERT INTO user (pseudo, mail, pass) VALUES (:pseudo, :mail, :pass)');
@@ -14,9 +20,14 @@ class UserManager{
             'mail' => $user->getMail(),
             'pass' => $user->getPass(),
         ]);
-
     }
 
+    /**
+     * Verification pseudo / mail si présent bdd
+     *
+     * @param user $user
+     * @return $result
+     */
     public function verifInscription(user $user){
         $db = dataBase::dbConnect();
         $req = $db->prepare('SELECT * FROM user WHERE pseudo= :pseudo');
@@ -41,14 +52,12 @@ class UserManager{
         }
     }
 
-    public function delete(user $id){
-        // supprimera un utilisateur avec son id
-    }
-
-    public function update(user $infos){
-        // updatera un utilisateur
-    }
-
+    /**
+     * connecte l'utilisateur
+     *
+     * @param user $user
+     * @return $result
+     */
     public function connect(user $user){
         $db = dataBase::dbConnect();
 		$req = $db->prepare('SELECT * FROM user WHERE pseudo= :pseudo');
@@ -61,6 +70,11 @@ class UserManager{
 		else
 		{	/* ---- Si connecté, création variable session ----- */
 			if ($Verif_Pass) {
+                $req = $db->prepare('UPDATE user SET connected=? WHERE pseudo=?');
+                $req->execute(array(
+                    true,
+                    $user->getPseudo()
+                ));
 				$_SESSION['ouvert']=true;
                 $_SESSION['id'] = $result['id'];
                 $result = true;
@@ -70,9 +84,46 @@ class UserManager{
 		}
     }
 
-    public function logout()
+    /**
+     * Récupère l'id, pseudo, mail de l'utilisateur
+     *
+     * @param [type] $pseudoId
+     * @return $pseudo
+     */
+    public function getPseudoById($pseudoId)
+    {
+        $db = dataBase::dbConnect();
+        $req = $db->query("SELECT id, pseudo, mail FROM user WHERE id=" . $pseudoId);
+        $pseudo = $req->fetch();
+        return $pseudo;
+    }
+
+    /**
+     * Sélectionne membres connectés
+     *
+     * @return void
+     */
+    public function connected()
+    {
+        $db = dataBase::dbConnect();
+        $req = $db->query("SELECT pseudo FROM user WHERE connected = true");
+        return $req;
+    }
+
+    /**
+     * Déconnecte l'utilisateur
+     *
+     * @return void
+     */
+    public function logout($userId)
 	{
+        $db = dataBase::dbConnect();
+        $req = $db->prepare('UPDATE user SET connected=? WHERE id=?');
+        $req->execute(array(
+            0,
+            $userId
+        ));
 		$_SESSION = array();
 		session_destroy();
-	}
+    }
 }

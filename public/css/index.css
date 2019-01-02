@@ -28,12 +28,8 @@ color:#008000;
 color:#CC0000;
 }
 
-#confirmSignUp{
-    display: none;
-}
-
 #returnCoError{
     color: red;
-    margin-left: 60px;
+    margin-left: 90px;
     margin-bottom: 20px;
 }

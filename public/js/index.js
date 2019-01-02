@@ -3,20 +3,14 @@ var confirmPass = document.getElementById('confirmPass');
 var pseudoCheck = document.getElementById("pseudo");
 var mail = document.getElementById("mail");
 
-var sendPseudo = false;
-var sendPass = false;
-var sendMail = false;
-var send = false;
 
 confirmPass.addEventListener("input", function(e) {
     if (confirmPass.value.length > 0) {
         if (pass.value === confirmPass.value) {
             $("#returnConfirmPass").css({ "background-image": "url('public/images/valider.png')" });
-            sendPass = true;
         }
         else{
             $("#returnConfirmPass").css({ "background-image": "url('public/images/croix.png')" });
-            sendPass = false;
         }
     }
 });
@@ -45,21 +39,18 @@ pseudoCheck.addEventListener('input',function () {
                 $("#returnPseudo").show(function () {
                     $(this).html('Unavailable name').addClass('busy').fadeTo(900, 1);
                     $(this).css({ 'color': 'red' });
-                    sendPseudo = false;
                 });
             }
             else {
                 $("#returnPseudo").show(function () {
                     $(this).html('Available name').addClass('dispo').fadeTo(900, 1);
                     $(this).css({ 'color': "green" });
-                    sendPseudo = true;
                 });
             }
         });
     }
     else{
         $("#returnPseudo").hide();
-        sendPseudo = false;
     }
 });
 
@@ -72,36 +63,23 @@ mail.addEventListener('input', function (){
                 $("#returnMail").show(function () {
                     $(this).html('Unavailable mail').addClass('busy').fadeTo(900, 1);
                     $(this).css({ 'color': 'red' });
-                    sendMail = false;
                 });
             }
             else {
                 $("#returnMail").show(function () {
                     $(this).html('Available mail').addClass('dispo').fadeTo(900, 1);
                     $(this).css({ 'color': "green" });
-                    sendMail = true;
                 });
             }
         });
     }
     else {
         $("#returnMail").hide();
-        sendMail = false;
     }
 });
 
-
-setInterval(() => {
-    if (sendMail && sendPass && sendPseudo) {
-        $('#confirmSignUp').fadeIn(500);
-    }
-    else{
-        $('#confirmSignUp').hide();
-    }
-}, 500);
-
 function errorCo(){
     var error = document.getElementById('returnCoError');
-    error.innerHTML = "Pseudo ou mot de passe incorrect";
+    error.innerHTML = "Incorrect informations";
 }
 

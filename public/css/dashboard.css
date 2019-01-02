@@ -1,0 +1,22 @@
+.rubric, .members{
+    border: 1px solid black;
+    text-align: center;
+    margin-top: 50px;
+    padding-bottom: 7px;
+}
+
+.members{
+    margin-top: 20px;
+}
+
+.title{
+    font-size: 2em;
+}
+
+#listDeck{
+    text-align: left;
+}
+
+#listMatches{
+    text-align: left;
+}

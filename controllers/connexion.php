@@ -42,6 +42,6 @@ if (isset($_POST['pseudoCo'])) {
 }
 
 if(isset($_GET['deco'])){
-    $userManager->logout();
+    $userManager->logout($_SESSION['id']);
     redirect_to('location:../index.php');
 }
