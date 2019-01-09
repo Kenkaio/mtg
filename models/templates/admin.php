@@ -8,8 +8,10 @@
 	<link href="../public/assets/Lumino_Template/lumino/css/font-awesome.min.css" rel="stylesheet">
 	<link href="../public/assets/Lumino_Template/lumino/css/datepicker3.css" rel="stylesheet">
 	<link href="../public/assets/Lumino_Template/lumino/css/styles.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../public/css/admin.css">
 	<link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/decks.css">
+	<link rel="stylesheet" type="text/css" href="../public/css/list.css">
+
 
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -26,7 +28,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Matega </span>Admin</a>
+				<a class="navbar-brand" href="#"><span>Matega </span></a>
 				<ul class="nav navbar-top-links navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 						<em class="fa fa-envelope"></em><span class="label label-danger">15</span>
@@ -95,26 +97,18 @@
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
-		<ul class="nav menu">
-			<li class="active"><a href="#"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li><a href="#"><em class="fa fa-gamepad">&nbsp;</em> Decks</a></li>
-			<li><a href="#"><em class="fa fa-bolt">&nbsp;</em> VS</a></li>
-			<li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Stats</a></li>
-			<li><a href="#"><em class="fa fa-users">&nbsp;</em> Members</a></li>
-			<li><a href="#"><em class="fa fa-cogs">&nbsp;</em> My profil</a></li>
+		<ul class="nav menu" id="menuDashboard">
+			<li class="active" id="dash"><a href="admin.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li id="decks"><a href="../controllers/deck.php?decks"><em class="fa fa-gamepad">&nbsp;</em> Decks</a></li>
+			<li id="vs"><a href="#"><em class="fa fa-bolt">&nbsp;</em> VS</a></li>
+			<li id="stats"><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Stats</a></li>
+			<li id="members"><a href="#"><em class="fa fa-users">&nbsp;</em> Members</a></li>
+			<li id="profil"><a href="#"><em class="fa fa-cogs">&nbsp;</em> My profil</a></li>
 			<li><a href="connexion.php?deco"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="#">
-					<em class="fa fa-home"></em>
-				</a></li>
-				<li class="active">Dashboard</li>
-			</ol>
-		</div><!--/.row-->
 
 		<div>
 			<?= $contentAdmin ?>
@@ -129,7 +123,9 @@
 	<script src="../public/assets/Lumino_Template/lumino/js/easypiechart-data.js"></script>
 	<script src="../public/assets/Lumino_Template/lumino/js/bootstrap-datepicker.js"></script>
 	<script src="../public/assets/Lumino_Template/lumino/js/custom.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 	<script src="../public/js/dashboard.js"></script>
+	<script src="../public/js/decks.js"></script>
 
 </body>
 </html>

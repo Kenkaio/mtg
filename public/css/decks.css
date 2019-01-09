@@ -1,0 +1,59 @@
+.listAllDecks{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+
+.listAllDecks h1{
+    color: white;
+}
+
+#newDeck a{
+    text-decoration: none;
+    color: rgb(144, 144, 144);
+}
+
+#newDeck{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+#searchReturn{
+    color: white;
+}
+
+.deckDetail h1{
+    margin-top: 100px;
+}
+
+.deckDetail h2{
+    font-size: 1.8em;
+    color: rgb(64, 145, 251);
+}
+
+.deckContent{
+    width: 90%;
+    margin: auto;
+    text-align: center;
+}
+
+#formDeck{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: auto;
+}
+
+label{
+    display: block;
+    width: 150px;
+    float: left;
+    text-align: left;
+    color: rgb(64, 145, 251);
+}
+
+#manaImg img{
+    width: 25px;
+}

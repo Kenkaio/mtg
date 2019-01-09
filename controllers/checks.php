@@ -3,6 +3,7 @@
 require '../models/class/autoloader.php';
 Autoloader::registerChecks();
 $userManager = new userManager();
+$db = dataBase::dbConnect();
 
 if(isset($_POST['pseudo'])){
 
@@ -11,7 +12,7 @@ if(isset($_POST['pseudo'])){
         echo ('empty');
     }
     else{
-        $req = $userManager->getPseudoById($pseudo);
+        $req = $db->query("SELECT pseudo FROM user WHERE pseudo='$pseudo'");
 
         $chk_pseudo = $req->fetch(PDO::FETCH_ASSOC);
 
@@ -28,7 +29,7 @@ if(isset($_POST['pseudo'])){
 if(isset($_POST['mail'])){
 
     $mail = $_POST['mail'];
-    $req = $userManager->getPseudoById($pseudo);
+    $req = $db->query("SELECT mail FROM user WHERE mail='$mail'");
 
     $chk_mail = $req->fetch(PDO::FETCH_ASSOC);
 

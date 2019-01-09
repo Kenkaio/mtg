@@ -1,0 +1,77 @@
+#newList{
+    position: absolute;
+    width: 200px;
+    margin-left: 50px;
+    margin-top: 50px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgb(85, 219, 243);
+}
+
+#returnList{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 50px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 20px rgb(119, 119, 119);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: rgb(92, 92, 92);
+    color: white;
+    display: none;
+}
+
+#returnList li{
+    list-style-type: none;
+}
+
+#checking{
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 50px;
+    font-size: 1.7em;
+    color: white;
+}
+
+#listDetail > div{
+    display: none;
+    padding: 15px;
+}
+
+#listDetail{
+    width: 350px;
+    background-color: white;
+    position: absolute;
+    margin-top: 75px;
+    margin-left: 300px;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 20px white;
+    display: none;
+}
+
+#titleCard{
+    width: 250px;
+    color: rgb(86, 191, 240);
+    font-weight: bold;
+}
+
+#nameCard{
+    display: flex;
+}
+
+#atkToug{
+    margin-left: 270px;
+}
+
+#manaImg{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+#cardType{
+    font-style: italic;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

@@ -79,7 +79,6 @@ class UserManager{
                 $_SESSION['id'] = $result['id'];
                 $result = true;
                 return $result;
-                die;
 			}
 		}
     }

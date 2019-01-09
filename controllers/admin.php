@@ -16,12 +16,15 @@ if (empty($_SESSION)) {
 }
 else{
     $userManager = new userManager();
-    $pseudo = $userManager->getPseudoById($_SESSION['id']);
     $decks = new decks();
     $matches = new matches();
-    $getDecks = $decks->getAllDecks($pseudo['id']);
-    $getMatches = $matches->getAllMatches($pseudo['id']);
+
+    $pseudo = $userManager->getPseudoById($_SESSION['id']);
+    $getDecks = $decks->getAllDecksLimit($pseudo['id']);
+    $getMatches = $matches->getAllMatchesLimit($pseudo['id']);
+    if(isset($_POST['matches'])){
+        $matches->matchesInJson($pseudo['id'], $_POST['matches']);
+    }
     require('../views/dashboard.php');
+
 }
-
-

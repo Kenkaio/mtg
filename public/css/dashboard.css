@@ -1,16 +1,17 @@
+body{
+    background-color: rgb(32, 39, 49);
+}
+
 .rubric, .members{
-    border: 1px solid black;
     text-align: center;
     margin-top: 50px;
     padding-bottom: 7px;
 }
 
-.members{
-    margin-top: 20px;
-}
-
 .title{
     font-size: 2em;
+    color: white;
+    font-weight: bold;
 }
 
 #listDeck{
@@ -19,4 +20,89 @@
 
 #listMatches{
     text-align: left;
+}
+
+#sidebar-collapse{
+    background-color: rgb(41, 42, 45);
+}
+
+#menuDashboard li a{
+    color: white;
+}
+
+.profile-usertitle-name{
+    color: white;
+}
+
+.decks{
+    background:linear-gradient(to left, rgb(246, 82, 82), rgb(32, 39, 49));
+    color: white;
+}
+
+.matches{
+    background:linear-gradient(to left, rgb(131, 233, 106), rgb(32, 39, 49));
+    color: white;
+}
+
+.members{
+    margin-top: 0px;
+    margin-right: -15px;
+    padding-top: 20px;
+    height: 900px;
+    background:linear-gradient(rgb(140, 197, 250), rgb(32, 39, 49));
+    color: black;
+    border-radius: 3px;
+}
+
+.decks, .matches{
+    height: 200px;
+    width: 400px;
+    border-radius: 3px;
+    font-size: 1.2em;
+}
+
+#deckBoxImg, #versusImg{
+    position: absolute;
+    opacity: 0.3;
+    left: 140px;
+}
+
+#versusImg{
+    width: 130px;
+    left: 160px;
+    opacity: 0.2;
+}
+
+#deckBoxImg{
+    top: 75px;
+}
+
+.allMembers{
+    font-size: 1.3em;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#titleMembers{
+    margin-bottom: 40px;
+}
+
+.allMembers li{
+    margin-top: 10px;
+}
+
+canvas{
+    margin: auto;
+    margin-top: 80px;
+}
+
+.chartContainer{
+    width: 70%;
+    margin: auto;
+}
+
+#selectDate{
+    position: absolute;
+    margin-top: 250px;
+    margin-left: 50px;
 }
