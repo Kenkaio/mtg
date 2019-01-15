@@ -4,13 +4,6 @@
         Login
     </span>
 
-    <div>
-        <a href="#" class="btn-login-with bg1 m-b-10">
-            <i class="fa fa-facebook-official"></i>
-            Login with Facebook
-        </a>
-    </div>
-
     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter pseudo">
         <input class="input100" type="text" name="pseudoCo" placeholder="Pseudo">
         <span class="focus-input100"></span>

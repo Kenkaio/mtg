@@ -1,5 +1,5 @@
 <?php
-session_start();
+//function redirection éviter les erreurs header
 function redirect_to($url){
     header($url);
     exit();
@@ -7,11 +7,16 @@ function redirect_to($url){
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+// autoloader
 require '../models/class/autoloader.php';
 Autoloader::registerChecks();
 
+session_start();
+
+// chargement des classes
 $userManager = new userManager();
 
+// ajout et connexion membre si infos ok
 if(isset($_POST['pseudo'])) {
     $user = new user([
         'pseudo' => htmlspecialchars($_POST['pseudo']),
@@ -28,6 +33,7 @@ if(isset($_POST['pseudo'])) {
 
 }
 
+// Vérification et connexion de l'utilisateur si infos ok
 if (isset($_POST['pseudoCo'])) {
     $user = new user([
         'pseudo' => htmlspecialchars($_POST['pseudoCo']),
@@ -41,6 +47,7 @@ if (isset($_POST['pseudoCo'])) {
     }
 }
 
+// Déconnecte l'utilisateur
 if(isset($_GET['deco'])){
     $userManager->logout($_SESSION['id']);
     redirect_to('location:../index.php');

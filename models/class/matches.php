@@ -41,6 +41,13 @@ class Matches{
         return $req;
     }
 
+    /**
+     * modifie fichier json matches de l'utilisateur
+     *
+     * @param [string] $userId
+     * @param [date] $year
+     * @return void
+     */
     public function matchesInJson($userId, $year){
         $matches = self::getAllMatchesByYear($userId, $year);
         $arrayMatches = "";

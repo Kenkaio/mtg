@@ -1,4 +1,4 @@
-#newList{
+#newList, #selectCommander{
     position: absolute;
     width: 200px;
     margin-left: 50px;
@@ -8,7 +8,11 @@
     border: 1px solid rgb(85, 219, 243);
 }
 
-#returnList{
+#selectCommander{
+    margin-left: 80px;
+}
+
+#returnList, #returnCommander{
     position: absolute;
     margin-top: 100px;
     margin-left: 50px;
@@ -19,9 +23,10 @@
     background-color: rgb(92, 92, 92);
     color: white;
     display: none;
+    z-index: 2;
 }
 
-#returnList li{
+#returnList li, #returnCommander li{
     list-style-type: none;
 }
 
@@ -38,40 +43,140 @@
     padding: 15px;
 }
 
-#listDetail{
-    width: 350px;
-    background-color: white;
-    position: absolute;
-    margin-top: 75px;
-    margin-left: 300px;
-    border-radius: 5px;
-    border: 1px solid black;
-    box-shadow: 0px 0px 20px white;
-    display: none;
-}
-
 #titleCard{
     width: 250px;
     color: rgb(86, 191, 240);
     font-weight: bold;
+    cursor: pointer;
 }
 
-#nameCard{
-    display: flex;
+.commanderList{
+    cursor: pointer;
 }
 
 #atkToug{
-    margin-left: 270px;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
 }
 
 #manaImg{
     position: absolute;
-    top: 5px;
-    right: 10px;
+    top: 15px;
+    right: 15px;
 }
 
 #cardType{
     font-style: italic;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.listCard{
+    display: none;
+    width: 300px;
+    min-height: 350px;
+    background-color: rgb(214, 214, 214);
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 150px;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 20px rgb(180, 180, 180);
+    color: rgb(46, 46, 46);
+    padding: 15px;
+    z-index: 2;
+}
+
+.cardList{
+    cursor: pointer;
+}
+
+.errorNoCard{
+    color: rgb(119, 0, 0);
+    font-weight: bold;
+}
+
+#cardText{
+    position: relative;
+    margin-top: 35px;
+}
+
+#nameCard{
+    display: flex;
+    padding: 0;
+}
+
+#completeList{
+    position: relative;
+    margin-left: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 80%;
+    right: 0;
+    color: white;
+}
+
+.listDiv{
+    width: 250px;
+    display: none;
+    list-style-type: none;
+}
+
+.listDiv h1{
+    font-size: 2em;
+    margin-left: -15px;
+    font-weight: bold;
+}
+
+#deckName{
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    margin-left: 50px;
+}
+
+#titleSelectCommander{
+    color: white;
+    font-size: 2em;
+    margin-top: 50px;
+    margin-left: 30px;
+}
+
+#historicList{
+    position: relative;
+    margin-top: 150px;
+    margin-left: 50px;
+}
+
+#confirmList img{
+    width: 100px;
+}
+
+#confirmList, #linkPrint{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    position: absolute;
+    left: 50%;
+    margin-left: -100px;
+}
+
+#titleHistoric{
+    color: white;
+    margin-left: 25px;
+    margin-top: 250px;
+}
+
+#historic li{
+    font-size: 1.2em;
+    color: rgb(185, 185, 185);
+    list-style-type: none;
+    cursor: pointer;
+}
+
+#linkPrint img{
+    width: 50px;
+    margin-left: -100px;
 }

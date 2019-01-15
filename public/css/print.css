@@ -1,0 +1,11 @@
+
+#printSection {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+#printSection div{
+    margin-left: 30px;
+}

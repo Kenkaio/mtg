@@ -2,61 +2,64 @@
 
 class Decks{
 
-    /**
-     * récupère la liste des decks de l'utilisateur, limit 5
-     *
-     * @param [int] $userId
-     * @return $req
-     */
-    public function getAllDecksLimit($userId){
-        $db = dataBase::dbConnect();
-        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ? LIMIT 5');
-        $req->execute(array($userId));
-        return $req;
+    private $_id;
+    private $_idUser;
+    private $_name;
+    private $_type;
+
+    public function __construct(array $donnees){
+        $this->hydrate($donnees);
     }
 
-    /**
-     * récupère la liste des decks de l'utilisateur
-     *
-     * @param [int] $userId
-     * @return $req
-     */
-    public function getAllDecks($userId){
-        $db = dataBase::dbConnect();
-        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ?');
-        $req->execute(array($userId));
-        return $req;
+    public function hydrate(array $donnees){
+        foreach ($donnees as $key => $value){
+            $method = 'set'.ucfirst($key);
+            if (method_exists($this, $method))
+            {
+                $this->$method($value);
+            }
+        }
+	}
+
+	public function getId(){
+		return $this->_id;
+	}
+
+	public function getIdUser(){
+		return $this->_idUser;
+	}
+
+	public function getName(){
+		return $this->_name;
+	}
+
+	public function getType(){
+		return $this->_type;
+	}
+
+	public function setId($id){
+		$id = (int) $id;
+		if($id > 0){
+			$this->_id = $id;
+		}
+	}
+
+	public function setIdUser($idUser){
+        $idUser = (int) $idUser;
+		if($idUser > 0){
+			$this->_idUser = $idUser;
+		}
+	}
+
+    public function setName($name){
+		if(is_string($name)){
+			$this->_name = $name;
+		}
     }
 
-    /**
-     * récupère un deck spécifique de l'utilisateur
-     *
-     * @param [string] $name
-     * @param [int] $userId
-     * @return void
-     */
-    public function getDeckByName($name, $userId){
-        $db = dataBase::dbConnect();
-        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ? AND name = ?');
-        $req->execute(array($userId, $name));
-        return $req;
-    }
-
-    /**
-     * Ajopute un nouveau deck à l'utilisateur
-     *
-     * @param [int] $idUser
-     * @param [string] $name
-     * @param [string] $type
-     * @return void
-     */
-    public function addDeck($idUser, $name, $type){
-        $db = dataBase::dbConnect();
-        $req = $db->prepare('INSERT INTO decks (idUser, name, type) VALUES (:idUser, :name, :type)');
-        $req->execute(array(
-            ':idUser' => $idUser,
-            'name' => $name,
-            'type' => $type
-        ));
-    }
+    public function setType($type){
+		if(is_string($type)){
+			$this->_type = $type;
+		}
+	}
 }

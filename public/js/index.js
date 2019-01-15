@@ -3,7 +3,7 @@ var confirmPass = document.getElementById('confirmPass');
 var pseudoCheck = document.getElementById("pseudo");
 var mail = document.getElementById("mail");
 
-
+// vérifie les deux mots de passes saisis
 confirmPass.addEventListener("input", function(e) {
     if (confirmPass.value.length > 0) {
         if (pass.value === confirmPass.value) {
@@ -15,6 +15,7 @@ confirmPass.addEventListener("input", function(e) {
     }
 });
 
+// vérifie la longueur du mdp
 pass.addEventListener("input", function (e) {
     if (pass.value.length >= 8) {
         msg = "Sufficient";
@@ -31,6 +32,7 @@ pass.addEventListener("input", function (e) {
     returnPass.style.color = msgColor;
 });
 
+// vérifie si pseudo dispo ou déjà présent dans bdd
 pseudoCheck.addEventListener('input',function () {
     if (pseudoCheck.value.length > 3) {
         $("#returnPseudo").text('Checking ...').fadeIn("slow");
@@ -54,6 +56,7 @@ pseudoCheck.addEventListener('input',function () {
     }
 });
 
+// idem pour le mail
 mail.addEventListener('input', function (){
     var reg = new RegExp("^[a-z0-9]+([_|.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|.|-]{1}[a-z0-9]+)*[.]{1}[a-z]{2,6}$", "i");
     if (reg.test(mail.value)){
@@ -78,6 +81,7 @@ mail.addEventListener('input', function (){
     }
 });
 
+// si php retourne une erreur alors affiche incorrect
 function errorCo(){
     var error = document.getElementById('returnCoError');
     error.innerHTML = "Incorrect informations";

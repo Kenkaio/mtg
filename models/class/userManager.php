@@ -100,7 +100,7 @@ class UserManager{
     /**
      * Sélectionne membres connectés
      *
-     * @return void
+     * @return req
      */
     public function connected()
     {

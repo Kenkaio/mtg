@@ -1,4 +1,5 @@
 <?php
+//function redirection éviter les erreurs header
 function redirect_to($url){
     header($url);
     exit();
@@ -6,17 +7,19 @@ function redirect_to($url){
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
-session_start();
-
+// autoloader
 require '../models/class/autoloader.php';
 Autoloader::registerChecks();
 
+session_start();
+
+// chargement page admin perso
 if (empty($_SESSION)) {
     redirect_to('location:../index.php');
 }
 else{
     $userManager = new userManager();
-    $decks = new decks();
+    $decks = new deckManager();
     $matches = new matches();
 
     $pseudo = $userManager->getPseudoById($_SESSION['id']);
@@ -26,5 +29,4 @@ else{
         $matches->matchesInJson($pseudo['id'], $_POST['matches']);
     }
     require('../views/dashboard.php');
-
 }
