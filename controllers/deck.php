@@ -70,13 +70,15 @@ else{
                     $commanderSelected = true;
                 }
                 file_put_contents('../public/assets/json/list.json', $returnCommander[0]->cards);
+                file_put_contents('../public/assets/json/numbersCards.json', $returnCommander[0]->number);
+
                 $_SESSION['allDeckInformations'] = $decks;
                 require('../views/newList.php');
                 echo'<script>seeDiv('.$returnCommander[0]->cards.');</script>';
                 $history = $list->getOldList($decks)->fetchAll(PDO::FETCH_OBJ);
                 for ($i=0; $i < count($history); $i++) {
                     $date = $history[$i]->date;
-                    echo'<script>seeHistoric(\''.$date.'\');</script>';
+                    echo'<script>seeHistoric(\''.$date.'\',\''.$history[$i]->id.'\');</script>';
                 }
             }
         }

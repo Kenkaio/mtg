@@ -38,11 +38,12 @@ class Lists {
      * @param [serialize(array)] $data
      * @return void
      */
-    public function addCardsToList(decks $decks, $data){
+    public function addCardsToList(decks $decks, $data, $numbers){
         $db = dataBase::dbConnect();
-        $req = $db->prepare('UPDATE lists SET cards=? WHERE idDeck=?');
+        $req = $db->prepare('UPDATE lists SET cards=?, number=? WHERE idDeck=?');
         $req->execute(array(
             $data,
+            $numbers,
             $decks->getId()
         ));
     }
@@ -56,11 +57,12 @@ class Lists {
         return $req;
     }
 
-    public function addToOldList(decks $decks, $data){
+    public function addToOldList(decks $decks, $data, $numbers){
         $db = dataBase::dbConnect();
-        $req = $db->prepare('INSERT INTO oldlist (idDeck, cards) VALUES (:idDeck, :cards)');
+        $req = $db->prepare('INSERT INTO oldlist (idDeck, cards, number) VALUES (:idDeck, :cards, :number)');
         $req->bindValue(':idDeck', $decks->getId());
         $req->bindValue(':cards', $data);
+        $req->bindValue(':number', $numbers);
         $req->execute();
     }
 
@@ -69,6 +71,15 @@ class Lists {
         $req = $db->prepare('SELECT * FROM oldlist WHERE idDeck = ? ORDER BY id DESC');
         $req->execute(array(
             $decks->getId()
+        ));
+        return $req;
+    }
+
+    public function getOldListById($data){
+        $db = dataBase::dbConnect();
+        $req = $db->prepare('SELECT * FROM oldlist WHERE id = ?');
+        $req->execute(array(
+            $data
         ));
         return $req;
     }

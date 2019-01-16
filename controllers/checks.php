@@ -78,6 +78,7 @@ if(isset($_POST['addCardToList'])){
 
     $cardName = $_POST['addCardToList'];
     $cardInfo = $cards->getCardByName($cardName);
+    $changeNumber = false;
 
     $cardInfo = $cardInfo->fetch(PDO::FETCH_OBJ);
     $type = strtolower($_SESSION['allDeckInformations']->getType());
@@ -91,28 +92,66 @@ if(isset($_POST['addCardToList'])){
         else if(strstr($cardInfo->type, "Sorcery") || strstr($cardInfo->type, "Instant")) {
             $type = 'spell';
         }
+        else if(strstr($cardInfo->type, "Land")) {
+            $type = 'land';
+        }
         else{
             $type = strtolower($cardInfo->type);
         }
 
-
+        if (strstr($cardInfo->type, "Basic Land")) {
+            $changeNumber = true;
+        }
 
         $json_source = file_get_contents('../public/assets/json/list.json');
         $var = json_decode($json_source, true);
+
+        $jsonNumberCards = file_get_contents('../public/assets/json/numbersCards.json');
+        $varNumber = json_decode($jsonNumberCards, true);
+
+        $dontChangeNumber = false;
+
         if(array_key_exists($type, $var)){
-            if (in_array($cardInfo->name, $var[$type])) {
+            if (in_array($cardInfo->name, $var[$type]) || in_array($cardInfo->name . '(Number1)', $var[$type])) {
                 echo 'added';
+                $dontChangeNumber = true;
             }
             else{
-                $var[$type] = is_array($var[$type]) ? array_merge($var[$type], [$cardInfo->name]) : [$var[$type], $cardInfo->name];
+                if($changeNumber){
+                    $value = $cardInfo->name . '(Number1)';
+                }
+                else{
+                    $value = $cardInfo->name;
+                }
+                $var[$type] = is_array($var[$type]) ? array_merge($var[$type], [$value]) : [$var[$type], $value];
             }
+
         }
         else{
-            $var[$type] = [$cardInfo->name];
+            if($changeNumber){
+                    $value = $cardInfo->name . '(Number1)';
+                }
+                else{
+                    $value = $cardInfo->name;
+                }
+            $var[$type] = [$value];
+
         }
 
-        $test = json_encode($var);
-        file_put_contents('../public/assets/json/list.json', $test);
+        if (!$dontChangeNumber) {
+            if(array_key_exists($type, $varNumber)){
+                $varNumber[$type] = $varNumber[$type] + 1;
+            }
+            else{
+                $varNumber[$type] = 1;
+            }
+        }
+
+        $put = json_encode($var);
+        file_put_contents('../public/assets/json/list.json', $put);
+
+        $putNumber = json_encode($varNumber);
+        file_put_contents('../public/assets/json/numbersCards.json', $putNumber);
     }
 }
 
@@ -146,9 +185,39 @@ if(isset($_POST['confirmList'])){
     $req = $lists->getCardsLists($_SESSION['allDeckInformations']);
     $cardList = $req->fetch(PDO::FETCH_OBJ);
     $json_source = file_get_contents('../public/assets/json/list.json');
-    $addCards = $lists->addCardsToList($_SESSION['allDeckInformations'], $json_source);
+    $numbers = file_get_contents('../public/assets/json/numbersCards.json');
+    $addCards = $lists->addCardsToList($_SESSION['allDeckInformations'], $json_source, $numbers);
     if($cardList->cards != '' &&  $cardList->cards != $json_source){
-        $addToOldList = $lists->addToOldList($_SESSION['allDeckInformations'], $cardList->cards);
+        $addToOldList = $lists->addToOldList($_SESSION['allDeckInformations'], $cardList->cards, $numbers);
     }
 
+}
+
+if(isset($_POST['oldList'])){
+    $id = substr($_POST['oldList'], 4);
+    $req = $lists->getOldListById($id);
+    $re = $req->fetch(PDO::FETCH_OBJ);
+    echo $re->cards;
+}
+
+if(isset($_POST['changeNumber'])){
+    $id = substr($_POST['numberId'], 6);
+    $numberPost = $_POST['changeNumber'] - 1;
+    $json_source = file_get_contents('../public/assets/json/list.json');
+    $var = json_decode($json_source, true);
+
+    $number = $numberPost + count($var['land']);
+    $numbers = file_get_contents('../public/assets/json/numbersCards.json');
+    $varNumbers = json_decode($numbers, true);
+    for ($i=0; $i < count($var['land']); $i++) {
+        if (strstr($var['land'][$i], $id.'(Number')) {
+            $var['land'][$i] = $id.'(Number'.$number.')';
+        }
+    }
+    $put = json_encode($var);
+    file_put_contents('../public/assets/json/list.json', $put);
+
+    $varNumbers['land'] = intval($number);
+    $putNumbers = json_encode($varNumbers);
+    file_put_contents('../public/assets/json/numbersCards.json', $putNumbers);
 }

@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <h1 id="titleDeckName">Deck name</h1>
             <form action="../controllers/deck.php" method="post" id="formDeck">
-                <label for="deckName">Name : </label><input type="text" name="deckName" id="deckName" required><br />
+                <label for="formDeckName">Name : </label><input type="text" name="formDeckName" id="formDeckName" required><br />
                 <label for="type">type : </label><SELECT name="type" size="1">
                     <OPTION selected>Duel
                     <OPTION>Multi

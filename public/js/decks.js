@@ -56,7 +56,24 @@ if (document.getElementById("newList") != null) {
         return xhr;
     }
 
-    var xhr = getXhr()
+    var xhr = getXhr();
+    var xhrNumbers = getXhr();
+
+    xhrNumbers.onreadystatechange = function () {
+        // On ne fait quelque chose que si on a tout reçu et que le serveur est ok
+        if (xhrNumbers.readyState == 4 && xhrNumbers.status == 200) {
+            var response = JSON.parse(xhrNumbers.responseText);
+            for (var key in response) {
+                var value = response[key];
+                var div = document.getElementById(key + "sNumber");
+                console.log(div);
+                div.innerHTML = ' ('+ value +')';
+
+                $("#" + key + "sNumber").fadeIn();
+            }
+        }
+    }
+
     // On défini ce qu'on va faire quand on aura la réponse
     xhr.onreadystatechange = function () {
         // On ne fait quelque chose que si on a tout reçu et que le serveur est ok
@@ -65,16 +82,27 @@ if (document.getElementById("newList") != null) {
             for (var key in response) {
                 var value = response[key];
                 var div = document.getElementById(key + "sCards");
-                div.innerHTML = "<h1>" + key.toUpperCase() +"</h1>";
+                div.innerHTML = "<h1>" + key.toUpperCase() + "<span id='" + key +"sNumber' class='numbersSpan'></span></h1>";
                 for (let index = 0; index < value.length; index++) {
-                    cardListDetail = document.createElement('li');
-                    cardListDetail.id = "detail" + value[index];
-                    cardListDetail.innerHTML = value[index];
+                    cardListDetail = document.createElement("li");
+                    if (value[index].indexOf("Island(Number") == 0 || value[index].indexOf("Swamp(Number") == 0 || value[index].indexOf("Mountain(Number") == 0 || value[index].indexOf("Forest(Number") == 0 || value[index].indexOf("Plains(Number") == 0) {
+                        var words = value[index].split("(");
+                        var numberSplit = value[index].split("Number");
+                        var number = numberSplit[1].split(")");
+                        cardListDetail.innerHTML = words[0] + ' x <input id="number' + words[0] + '" type="number" value="' + number[0] + '" min="1" max="99" class="inputNumberCards" onchange="inputNumber(this)" ></input>';
+                        cardListDetail.id = "detail" + words[0];
+                    } else {
+                        cardListDetail.innerHTML = value[index];
+                        cardListDetail.id = "detail" + value[index];
+                    }
+
                     div.appendChild(cardListDetail);
                 }
 
                 $("#" + key + "sCards").fadeIn();
             }
+            xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
+            xhrNumbers.send(null);
         }
     }
 
@@ -94,7 +122,6 @@ if (document.getElementById("newList") != null) {
                     xhr.open("GET", "../public/assets/json/list.json", true);
                     xhr.send(null);
                 }
-
             });
         }
     });
@@ -143,24 +170,75 @@ function seeDiv(data) {
     for (var key in data) {
         var value = data[key];
         var div = document.getElementById(key + "sCards");
-        div.innerHTML = "<h1>" + key.toUpperCase() + "</h1>";
+        div.innerHTML = "<h1>" + key.toUpperCase() + "<span id='" + key + "sNumber' class='numbersSpan'></span></h1>";
         for (let index = 0; index < value.length; index++) {
-            cardListDetail = document.createElement('li');
-            cardListDetail.id = "detail" + value[index];
-            cardListDetail.innerHTML = value[index];
+            cardListDetail = document.createElement("li");
+            if (value[index].indexOf("Island(Number") == 0 || value[index].indexOf("Swamp(Number") == 0 || value[index].indexOf("Mountain(Number") == 0 || value[index].indexOf("Forest(Number") == 0 || value[index].indexOf("Plains(Number") == 0) {
+                var words = value[index].split("(");
+                var numberSplit = value[index].split("Number");
+                var number = numberSplit[1].split(")");
+                cardListDetail.innerHTML = words[0] + ' x <input id="number' + words[0] + '" type="number" value="' + number[0] + '" min="1" max="99" class="inputNumberCards" onchange="inputNumber(this)" ></input>';
+                cardListDetail.id = "detail" + words[0];
+            } else {
+                cardListDetail.innerHTML = value[index];
+                cardListDetail.id = "detail" + value[index];
+            }
+
             div.appendChild(cardListDetail);
         }
+
         $("#" + key + "sCards").fadeIn();
     }
 }
 
-function seeHistoric(date){
+function seeHistoric(date, id){
     historicList = document.createElement('li');
-    historicList.id = date;
+    historicList.id = "date" + id;
     historicList.innerHTML = date;
+    historicList.onclick = function (event) {
+        $.post("../controllers/checks.php", { oldList: event.target.id }, function (data) {
+            $("#commandersCards").html("");
+            $("#landsCards").html("");
+            $("#creaturesCards").html("");
+            $("#artifactsCards").html("");
+            $("#enchantmentsCards").html("");
+            $("#spellsCards").html("");
+            var response = JSON.parse(data);
+            for (var key in response) {
+                var value = response[key];
+                var div = document.getElementById(key + "sCards");
+                div.innerHTML = "<h1>" + key.toUpperCase() + "<span id='" + key + "sNumber' class='numbersSpan'></span></h1>";
+                for (let index = 0; index < value.length; index++) {
+                    cardListDetail = document.createElement("li");
+                    if (value[index].indexOf("Island(Number") == 0 || value[index].indexOf("Swamp(Number") == 0 || value[index].indexOf("Mountain(Number") == 0 || value[index].indexOf("Forest(Number") == 0 || value[index].indexOf("Plains(Number") == 0) {
+                        var words = value[index].split("(");
+                        var numberSplit = value[index].split("Number");
+                        var number = numberSplit[1].split(")");
+                        cardListDetail.innerHTML = words[0] + ' x <input id="number' + words[0] + '" type="number" value="' + number[0] + '" min="1" max="99" class="inputNumberCards" onchange="inputNumber(this)" ></input>';
+                        cardListDetail.id = "detail" + words[0];
+                    } else {
+                        cardListDetail.innerHTML = value[index];
+                        cardListDetail.id = "detail" + value[index];
+                    }
+
+                    div.appendChild(cardListDetail);
+                }
+
+                $("#" + key + "sCards").fadeIn();
+            }
+        });
+    };
+    xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
+    xhrNumbers.send(null);
     document.getElementById("historic").appendChild(historicList);
 }
 
-$("#historic").on("click", function (event) {
-    console.log(event.taget.id);
-});
+function inputNumber(event){
+    number = event.value;
+    $.post("../controllers/checks.php", { changeNumber: number, numberId: event.id }, function (data) {
+        xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
+        xhrNumbers.send(null);
+    });
+}
+
+

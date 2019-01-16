@@ -17,21 +17,32 @@
 
     <section id='printSection'>
         <div class="listDiv" id="landsCards">
-            <h1>LANDS</h1>
             <?php
+                if(array_key_exists('land', $data)){
+                    echo '<h1>LANDS</h1>';
+                }
                 foreach ($data as $key => $value) {
                     if($key == 'land'){
                         for ($i=0; $i < count($value); $i++) {
-                            echo '<li>'.$value[$i].'</li>';
+                            if (count(explode('(', $value[$i])) > 1){
+                                $a = explode('(', $value[$i]);
+                                $b = explode('Number', $a[1]);
+                                $number = explode(')', $b[1]);
+                                echo '<li>' . $a[0] . ' x' . $number[0] .'</li>';
+                            }
+                            else{
+                                echo '<li>'.$value[$i].'</li>';
+                            }
                         }
                     }
-
                 }
             ?>
         </div>
         <div class="listDiv" id="creaturesCards">
-            <h1>CREATURES</h1>
             <?php
+                if(array_key_exists('creature', $data)){
+                    echo '<h1>CREATURES</h1>';
+                }
                 foreach ($data as $key => $value) {
                     if($key == 'creature'){
                         for ($i=0; $i < count($value); $i++) {
@@ -43,8 +54,10 @@
             ?>
         </div>
         <div class="listDiv" id="artifactsCards">
-            <h1>ARTIFACTS</h1>
             <?php
+                if(array_key_exists('artifact', $data)){
+                    echo '<h1>ARTIFACTS</h1>';
+                }
                 foreach ($data as $key => $value) {
                     if($key == 'artifact'){
                         for ($i=0; $i < count($value); $i++) {
@@ -56,8 +69,10 @@
             ?>
         </div>
         <div class="listDiv" id="enchantmentsCards">
-            <h1>ENCHANTMENTS</h1>
             <?php
+                if(array_key_exists('enchantment', $data)){
+                    echo '<h1>ENCHANTMENTS</h1>';
+                }
                 foreach ($data as $key => $value) {
                     if($key == 'enchantment'){
                         for ($i=0; $i < count($value); $i++) {
@@ -69,8 +84,10 @@
             ?>
         </div>
         <div class="listDiv" id="spellsCards">
-            <h1>SPELLS</h1>
             <?php
+                if(array_key_exists('spell', $data)){
+                    echo '<h1>SPELLS</h1>';
+                }
                 foreach ($data as $key => $value) {
                     if($key == 'spell'){
                         for ($i=0; $i < count($value); $i++) {

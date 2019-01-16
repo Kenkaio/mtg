@@ -122,11 +122,11 @@
     width: 250px;
     display: none;
     list-style-type: none;
+    padding: 20px;
 }
 
 .listDiv h1{
     font-size: 2em;
-    margin-left: -15px;
     font-weight: bold;
 }
 
@@ -179,4 +179,18 @@
 #linkPrint img{
     width: 50px;
     margin-left: -100px;
+}
+
+.inputNumberCards{
+    width: 33px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.numbersSpan{
+    font-size: 0.6em;
+    position: absolute;
+    margin-top: 2px;
+    margin-left: 5px;
 }
