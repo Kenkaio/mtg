@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<form method="post" action="controllers/connexion.php" class="login100-form validate-form">
+<form method="post" action="index.php?action=tryConnect" class="login100-form validate-form">
     <span class="login100-form-title p-b-40">
         Login
     </span>
@@ -29,12 +29,13 @@
             Don’t have an account?
         </span>
 
-        <a href="?creat" class="txt3 bo1 hov1">
+        <a href="index.php?action=viewCreateUser" class="txt3 bo1 hov1">
             Sign up now
         </a>
     </div>
 
 </form>
+
 <?php $content = ob_get_clean(); ?>
-<script src="public/js/index.js"></script>
+
 <?php require 'models/templates/index.php'; ?>

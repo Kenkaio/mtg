@@ -14,12 +14,6 @@ class UserManager{
         $req->bindValue(':mail', $user->getMail());
         $req->bindValue(':pass', password_hash($user->getPass(),  PASSWORD_DEFAULT));
         $req->execute();
-
-        $user->hydrate([
-            'pseudo' => $user->getPseudo(),
-            'mail' => $user->getMail(),
-            'pass' => $user->getPass(),
-        ]);
     }
 
     /**
@@ -93,7 +87,7 @@ class UserManager{
     {
         $db = dataBase::dbConnect();
         $req = $db->query("SELECT id, pseudo, mail FROM user WHERE id=" . $pseudoId);
-        $pseudo = $req->fetch();
+        $pseudo = $req->fetch(PDO::FETCH_OBJ);
         return $pseudo;
     }
 

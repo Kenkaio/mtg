@@ -35,10 +35,24 @@ class DeckManager{
      * @param [int] $userId
      * @return void
      */
-    public function getDeckByName($name, $userId){
+    public function getDeckById($userId, $id){
         $db = dataBase::dbConnect();
-        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ? AND name = ?');
-        $req->execute(array($userId, $name));
+        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ? AND id = ?');
+        $req->execute(array($userId, $id));
+        return $req;
+    }
+
+    /**
+     * récupère un deck spécifique de l'utilisateur avec son nom et son type
+     *
+     * @param [string] $name
+     * @param [int] $userId
+     * @return void
+     */
+    public function getDeckByNameAndType($name, $type, $userId){
+        $db = dataBase::dbConnect();
+        $req = $db->prepare('SELECT * FROM decks WHERE idUser = ? AND name = ? AND type = ?');
+        $req->execute(array($userId, $name, $type));
         return $req;
     }
 
@@ -57,12 +71,6 @@ class DeckManager{
         $req->bindValue('name', $decks->getName());
         $req->bindValue('type', $decks->getType());
         $req->execute();
-
-        $decks->hydrate([
-            'idUser' => $decks->getIdUser(),
-            'name' => $decks->getName(),
-            'type' => $decks->getType(),
-        ]);
     }
 
     /**
@@ -72,10 +80,10 @@ class DeckManager{
      * @param [string] $post
      * @return void
      */
-    public function returnInfosDeckDuel($post){
+    public function returnInfosDeckDuel($post, $type){
         $db = dataBase::dbConnect();
 
-        $req = $db->query("SELECT * FROM cards WHERE name LIKE '%$post%' AND (duel ='Legal' || duel='Restricted') LIMIT 10");
+        $req = $db->query("SELECT * FROM cards WHERE name LIKE '%$post%' AND ($type ='Legal' || $type='Restricted') LIMIT 10");
 
         return $req;
     }
@@ -96,5 +104,30 @@ class DeckManager{
         LIMIT 10");
 
         return $req;
+    }
+
+    /**
+     * Change les lettres par des images
+     *
+     * @param [array] $deckList
+     * @return $commanderSelected, $color (array)
+     */
+    public function changeStringByImg($deckList){
+        $letters = array("U", "G", "R", "B", "W", "P");
+        $afterLetters = array();
+        for ($i=0; $i < count($letters); $i++) {
+            $afterLetters[$i] = "<img src='public/images/mana/" . $letters[$i] . ".png'' width='40px'/>";
+        }
+        if(count($deckList) != 0){
+            $commanderSelected = false;
+            $color = str_replace($letters, $afterLetters, $deckList[0]->colors);
+            $color = str_replace(',', '', $color);
+        }
+        else{
+            $commanderSelected = true;
+        }
+        file_put_contents('public/assets/json/list.json', $deckList[0]->cards);
+        file_put_contents('public/assets/json/numbersCards.json', $deckList[0]->number);
+        return array($commanderSelected, $color);
     }
 }

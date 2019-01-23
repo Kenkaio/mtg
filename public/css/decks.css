@@ -57,3 +57,8 @@ label{
 #manaImg img{
     width: 25px;
 }
+
+#errorDeckName{
+    color: red;
+    padding: 10px;
+}

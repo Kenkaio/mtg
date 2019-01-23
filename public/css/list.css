@@ -194,3 +194,22 @@
     margin-top: 2px;
     margin-left: 5px;
 }
+
+#infosMulti{
+    display: none;
+    position: absolute;
+    background-color: rgb(32, 39, 49);
+    color: white;
+    border-radius: 7px;
+    padding: 15px;
+    z-index: 2;
+    border: 1px solid white;
+}
+
+#closeInfosMulti{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}

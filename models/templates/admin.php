@@ -4,13 +4,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Matega</title>
-	<link href="../public/assets/Lumino_Template/lumino/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../public/assets/Lumino_Template/lumino/css/font-awesome.min.css" rel="stylesheet">
-	<link href="../public/assets/Lumino_Template/lumino/css/datepicker3.css" rel="stylesheet">
-	<link href="../public/assets/Lumino_Template/lumino/css/styles.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="../public/css/dashboard.css">
-	<link rel="stylesheet" type="text/css" href="../public/css/decks.css">
-	<link rel="stylesheet" type="text/css" href="../public/css/list.css">
+	<link href="public/assets/Lumino_Template/lumino/css/bootstrap.min.css" rel="stylesheet">
+	<link href="public/assets/Lumino_Template/lumino/css/font-awesome.min.css" rel="stylesheet">
+	<link href="public/assets/Lumino_Template/lumino/css/datepicker3.css" rel="stylesheet">
+	<link href="public/assets/Lumino_Template/lumino/css/styles.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="public/css/dashboard.css">
+	<link rel="stylesheet" type="text/css" href="public/css/decks.css">
+	<link rel="stylesheet" type="text/css" href="public/css/list.css">
 
 
 	<!--Custom Font-->
@@ -91,20 +91,20 @@
 				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name"><?= $pseudo['pseudo'] ?></div>
+				<div class="profile-usertitle-name"><?= $pseudo->pseudo ?></div>
 				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
 			</div>
 			<div class="clear"></div>
 		</div>
 		<div class="divider"></div>
 		<ul class="nav menu" id="menuDashboard">
-			<li class="active" id="dash"><a href="admin.php"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li id="decks"><a href="../controllers/deck.php?decks"><em class="fa fa-gamepad">&nbsp;</em> Decks</a></li>
+			<li class="active" id="dash"><a href="index.php?action=connected"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li id="decks"><a href="index.php?action=viewDecks"><em class="fa fa-gamepad">&nbsp;</em> Decks</a></li>
 			<li id="vs"><a href="#"><em class="fa fa-bolt">&nbsp;</em> VS</a></li>
 			<li id="stats"><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Stats</a></li>
 			<li id="members"><a href="#"><em class="fa fa-users">&nbsp;</em> Members</a></li>
 			<li id="profil"><a href="#"><em class="fa fa-cogs">&nbsp;</em> My profil</a></li>
-			<li><a href="connexion.php?deco"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="index.php?action=disconnect"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -115,17 +115,18 @@
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 
-	<script src="../public/assets/Lumino_Template/lumino/js/jquery-1.11.1.min.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/bootstrap.min.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/chart.min.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/chart-data.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/easypiechart.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/easypiechart-data.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/bootstrap-datepicker.js"></script>
-	<script src="../public/assets/Lumino_Template/lumino/js/custom.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/jquery-1.11.1.min.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/bootstrap.min.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/chart.min.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/chart-data.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/easypiechart.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/easypiechart-data.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/bootstrap-datepicker.js"></script>
+	<script src="public/assets/Lumino_Template/lumino/js/custom.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-	<script src="../public/js/dashboard.js"></script>
-	<script src="../public/js/decks.js"></script>
+	<script src="public/js/dashboard.js"></script>
+	<script src="public/js/decks.js"></script>
+	<script src="public/js/list.js"></script>
 
 </body>
 </html>

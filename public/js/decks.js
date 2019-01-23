@@ -6,7 +6,7 @@ if (document.getElementById("newList") != null) {
     // affiche la liste des cartes valides
     search.addEventListener('input', function () {
         $("#checking").text('Checking ...').fadeIn("slow");
-        $.post("../controllers/list.php", { cardList: $(this).val() }, function (data) {
+        $.post("index.php?action=cardList", { cardList: $(this).val() }, function (data) {
             $("#returnList").fadeIn(function() {
             list.innerHTML = data;
             });
@@ -66,7 +66,6 @@ if (document.getElementById("newList") != null) {
             for (var key in response) {
                 var value = response[key];
                 var div = document.getElementById(key + "sNumber");
-                console.log(div);
                 div.innerHTML = ' ('+ value +')';
 
                 $("#" + key + "sNumber").fadeIn();
@@ -101,7 +100,7 @@ if (document.getElementById("newList") != null) {
 
                 $("#" + key + "sCards").fadeIn();
             }
-            xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
+            xhrNumbers.open("GET", "public/assets/json/numbersCards.json", true);
             xhrNumbers.send(null);
         }
     }
@@ -109,7 +108,7 @@ if (document.getElementById("newList") != null) {
     // ajoute la carte
     $("#returnList").on("click", function (event){
         if(event.target.className == 'cardList'){
-            $.post("../controllers/checks.php", { addCardToList: event.target.id }, function (data) {
+            $.post("index.php?action=addCardToList", { addCardToList: event.target.id }, function (data) {
                 if (data === "added"){
                     li = document.getElementById("detail" + event.target.id);
                     li.style.color = "red";
@@ -119,7 +118,7 @@ if (document.getElementById("newList") != null) {
                       li.style.transition = "1s";
                     }, 1000);
                 }else{
-                    xhr.open("GET", "../public/assets/json/list.json", true);
+                    xhr.open("GET", "public/assets/json/list.json", true);
                     xhr.send(null);
                 }
             });
@@ -134,7 +133,7 @@ if (document.getElementById("selectCommander") != null) {
 
     commander.addEventListener('input', function () {
         $("#checkingCommander").text('Checking ...').fadeIn("slow");
-        $.post("../controllers/checks.php", { selectCommander: $(this).val() }, function (data) {
+        $.post("index.php?action=listCommander", { selectCommander: $(this).val() }, function (data) {
             $("#returnCommander").fadeIn(function() {
                 document.getElementById("returnCommander").innerHTML = data;
             });
@@ -144,8 +143,10 @@ if (document.getElementById("selectCommander") != null) {
 
     $("#returnCommander").on("click", function (event) {
         if (event.target.className == 'commanderList') {
-            $.post("../controllers/checks.php", { addCommander: event.target.id }, function (data) {
-
+            $.post("index.php?action=addCommander", { addCommander: event.target.id }, function (data) {
+                if(data == "notLegal"){
+                    alert("Banned commander");
+                }
             });
             window.location.reload();
         }
@@ -157,7 +158,7 @@ if (document.getElementById("confirmList") != null) {
 
     var confirm = document.getElementById("confirmList");
     $("#confirmList").on("click", function () {
-        $.post("../controllers/checks.php", { confirmList: "confirm list" }, function (data) {
+        $.post("index.php?action=confirmList", { confirmList: "confirm list" }, function (data) {
 
         });
         window.location.reload();
@@ -188,6 +189,8 @@ function seeDiv(data) {
         }
 
         $("#" + key + "sCards").fadeIn();
+        xhrNumbers.open("GET", "public/assets/json/numbersCards.json", true);
+        xhrNumbers.send(null);
     }
 }
 
@@ -196,7 +199,7 @@ function seeHistoric(date, id){
     historicList.id = "date" + id;
     historicList.innerHTML = date;
     historicList.onclick = function (event) {
-        $.post("../controllers/checks.php", { oldList: event.target.id }, function (data) {
+        $.post("index.php?action=oldList", { oldList: event.target.id }, function (data) {
             $("#commandersCards").html("");
             $("#landsCards").html("");
             $("#creaturesCards").html("");
@@ -226,19 +229,23 @@ function seeHistoric(date, id){
 
                 $("#" + key + "sCards").fadeIn();
             }
+            xhrNumbers.open("GET", "public/assets/json/numbersCards.json", true);
+            xhrNumbers.send(null);
         });
     };
-    xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
-    xhrNumbers.send(null);
+
     document.getElementById("historic").appendChild(historicList);
 }
 
 function inputNumber(event){
     number = event.value;
-    $.post("../controllers/checks.php", { changeNumber: number, numberId: event.id }, function (data) {
-        xhrNumbers.open("GET", "../public/assets/json/numbersCards.json", true);
+    $.post("index.php?action=changeNumber", { changeNumber: number, numberId: event.id }, function (data) {
+        xhrNumbers.open("GET", "public/assets/json/numbersCards.json", true);
         xhrNumbers.send(null);
     });
 }
 
-
+function errorDeckName() {
+    var errorDeckName = document.getElementById("errorDeckName");
+    errorDeckName.innerHTML = "Deck Name already used for this type";
+}

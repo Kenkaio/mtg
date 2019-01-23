@@ -33,3 +33,34 @@ color:#CC0000;
     margin-left: 90px;
     margin-bottom: 20px;
 }
+
+#error404{
+    position: absolute;
+    width: 60%;
+    left: 50%;
+    margin-left: -30%;
+    top: 50%;
+    margin-top: -300px;
+}
+
+#bodyError{
+    background-color: rgba(17, 22, 22, 0.96);
+}
+
+#home{
+    text-decoration: none;
+    position: absolute;
+    font-size: 1.5em;
+    color: white;
+    bottom: 20%;
+    right: 25%;
+}
+
+#textHome{
+    text-decoration: none;
+    position: absolute;
+    font-size: 1.2em;
+    color: white;
+    bottom: 22%;
+    right: 21%;
+}

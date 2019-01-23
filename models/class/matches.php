@@ -51,19 +51,19 @@ class Matches{
     public function matchesInJson($userId, $year){
         $matches = self::getAllMatchesByYear($userId, $year);
         $arrayMatches = "";
-        fclose(fopen('../public/assets/json/arrayMatches.json', 'w'));
+        fclose(fopen('public/assets/json/arrayMatches.json', 'w'));
         $i=0;
         while ($matche = $matches->fetch(PDO::FETCH_OBJ))
         {
             $arrayMatches = $matche;
-            $js = file_get_contents('../public/assets/json/arrayMatches.json');
+            $js = file_get_contents('public/assets/json/arrayMatches.json');
 
             $js = json_decode($js, true);
 
             $js[] = $arrayMatches;
 
             $js = json_encode($js);
-            file_put_contents('../public/assets/json/arrayMatches.json', $js);
+            file_put_contents('public/assets/json/arrayMatches.json', $js);
         }
     }
 }

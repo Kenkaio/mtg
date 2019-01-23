@@ -36,7 +36,7 @@ pass.addEventListener("input", function (e) {
 pseudoCheck.addEventListener('input',function () {
     if (pseudoCheck.value.length > 3) {
         $("#returnPseudo").text('Checking ...').fadeIn("slow");
-        $.post("controllers/checks.php", { pseudo: $(this).val() }, function (data) {
+        $.post("index.php?action=checkPseudo", { pseudo: $(this).val() }, function (data) {
             if (data == 'no') {
                 $("#returnPseudo").show(function () {
                     $(this).html('Unavailable name').addClass('busy').fadeTo(900, 1);
@@ -61,7 +61,7 @@ mail.addEventListener('input', function (){
     var reg = new RegExp("^[a-z0-9]+([_|.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|.|-]{1}[a-z0-9]+)*[.]{1}[a-z]{2,6}$", "i");
     if (reg.test(mail.value)){
         $("#returnMail").text('Checking ...').fadeIn("slow");
-        $.post("controllers/checks.php", { mail: $(this).val() }, function (data) {
+        $.post("index.php?action=checkMail", { mail: $(this).val() }, function (data) {
             if (data == 'no') {
                 $("#returnMail").show(function () {
                     $(this).html('Unavailable mail').addClass('busy').fadeTo(900, 1);

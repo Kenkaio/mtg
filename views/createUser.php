@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<form method="post" action="controllers/connexion.php" class="login100-form validate-form">
+<form method="post" action="index.php?action=createUser.php" class="login100-form validate-form">
     <span class="login100-form-title p-b-40">
         Sign In
     </span>
@@ -46,7 +46,7 @@
             Have an account?
         </span>
 
-        <a href="index.php" class="txt3 bo1 hov1">
+        <a href="index.php?action=authentification" class="txt3 bo1 hov1">
             Sign in now
         </a>
     </div>

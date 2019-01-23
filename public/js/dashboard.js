@@ -1,17 +1,14 @@
 //retourne la liste des membres connectés en ajax
-$.post("checks.php", { members: "" }, function(data) {
+$.post("index.php?action=membersList", { members: "" }, function(data) {
     $("#membersConnected").html(data);
 });
 
 if (document.getElementById("selectDate") != null) {
     valueMatches = document.getElementById("selectDate").value;
 
-
-    $.post("admin.php", { matches: valueMatches }, function() {});
-
     //répète l'opération toute les 5"
     setInterval(() => {
-        $.post("checks.php", { members: "" }, function(data) {
+        $.post("index.php?action=membersList", { members: "" }, function(data) {
             $("#membersConnected").html(data);
         });
     }, 5000);
@@ -99,7 +96,7 @@ if (document.getElementById("selectDate") != null) {
         }
     }
 
-    xhr.open("GET", "../public/assets/json/arrayMatches.json", true);
+    xhr.open("GET", "public/assets/json/arrayMatches.json", true);
     xhr.send(null);
 
     // affiche un graphique des matche de l'utilisateur, par années
@@ -148,9 +145,9 @@ if (document.getElementById("selectDate") != null) {
     // affiche les 5 derniers matchs de l'utilisateur
     document.getElementById("selectDate").onchange = function() {
         char.destroy();
-        $.post("admin.php", { matches: this.value }, function () {});
+        $.post("index.php?action=matchesByYear", { matches: this.value }, function () {});
         setTimeout(() => {
-            xhr.open("GET", "../public/assets/json/arrayMatches.json", true);
+            xhr.open("GET", "public/assets/json/arrayMatches.json", true);
             xhr.send(null);
         }, 500);
         setTimeout(() => {
